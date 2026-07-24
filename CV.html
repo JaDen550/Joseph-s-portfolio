@@ -1,0 +1,86 @@
+# Update the DOCX CV with the degree information provided by the user
+
+from docx import Document
+
+# Create a new document
+doc = Document()
+
+# Title
+doc.add_heading('JOSEPH SAHR MORSAY', 0)
+doc.add_paragraph('Graphic Designer & Tech Enthusiast')
+
+# Contact
+p = doc.add_paragraph()
+p.add_run('Freetown, Sierra Leone\n')
+p.add_run('Email: josephmorsay0@gmail.com\n')
+p.add_run('Phone: 073 443 275 / 031 175745\n')
+p.add_run('LinkedIn: https://www.linkedin.com/in/joseph-morsay-81a862273')
+
+# Function to add sections
+def add_section(title, items):
+    doc.add_heading(title, level=1)
+    for item in items:
+        doc.add_paragraph(item)
+
+# Sections
+add_section("PROFESSIONAL SUMMARY", [
+"Driven and analytical student with a strong foundation in data concepts, system development, and graphic design. Experienced in building practical tech solutions, including business data tools and intelligent surveillance systems. Proficient in leveraging AI tools to enhance productivity and workflow efficiency. Combines technical thinking with creative design skills to deliver impactful and user-focused solutions."
+])
+
+add_section("KEY SKILLS", [
+"Data Analysis (Basic to Intermediate)",
+"Graphic Design (Photoshop)",
+"Business Intelligence Concepts",
+"System Design & Development",
+"AI Tools & Workflow Automation (Approx. 70–75% proficiency)",
+"Microsoft Word, Publisher & PowerPoint (Advanced)",
+"Microsoft Excel (Improving proficiency)",
+"Problem Solving & Critical Thinking",
+"Communication & Team Collaboration"
+])
+
+add_section("PROJECT EXPERIENCE", [
+"MassView – Smart CCTV Analytics System: Designed a system integrated with CCTV cameras to automatically count and categorize attendees and provide real-time insights.",
+"Business Data Assistant AI Tool: Developing a solution to help small businesses track sales, manage inventory, and forecast profits using data concepts and AI workflows.",
+"UX Design Coursework Projects: Designed user-focused interfaces in Figma and applied Agile and Waterfall methodologies."
+])
+
+add_section("EDUCATION", [
+"Institute of Public Administration and Management (IPAM), Sierra Leone",
+"B.Sc. (Hons) Information Systems, Expected Graduation: 2026"
+])
+
+add_section("ADDITIONAL EXPERIENCE", [
+"Graphic Designer (Freelance): Designed logos and branding materials using Adobe Photoshop and AI-assisted tools."
+])
+
+add_section("TOOLS & TECHNOLOGIES", [
+"Adobe Photoshop",
+"Figma",
+"AI Tools (ChatGPT and design tools)",
+"Microsoft Word, Publisher, PowerPoint",
+"Microsoft Excel (Learning)"
+])
+
+add_section("PERSONAL ATTRIBUTES", [
+"Creative and detail-oriented",
+"Tech-savvy and adaptable",
+"Fast learner",
+"Self-motivated"
+])
+
+add_section("INTERESTS", [
+"Graphic design and digital branding",
+"Data analytics and AI applications",
+"Tech solutions for local businesses"
+])
+
+add_section("REFERENCES", [
+"Marie Kargbo – Social Worker, NaCSA, Phone: 079317003"
+])
+
+# Save updated CV
+file_path = "/mnt/data/Joseph_Sahr_Morsay_CV_Final.docx"
+doc.save(file_path)
+
+file_path
