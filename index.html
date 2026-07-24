@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Sahr Morsay — Portfolio</title>
+    <meta name="description" content="Information Systems Student, Graphic Designer, Web Developer & Tech Entrepreneur from Sierra Leone.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+    <style>
+        :root {
+            --bg: #fafafa; --surface: #ffffff; --text-primary: #111111;
+            --text-secondary: #666666; --text-tertiary: #999999;
+            --border: #e5e5e5; --border-light: #f0f0f0;
+            --accent: #2563eb; --accent-light: rgba(37,99,235,0.08); --accent-dark: #1d4ed8;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+            --shadow-hover: 0 4px 12px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.06);
+            --radius-sm: 6px; --radius-md: 10px; --radius-lg: 12px; --radius-xl: 16px;
+            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0a0a; --surface: #141414; --text-primary: #f5f5f5;
+                --text-secondary: #a0a0a0; --text-tertiary: #666666;
+                --border: #262626; --border-light: #1a1a1a;
+                --accent: #60a5fa; --accent-light: rgba(96,165,250,0.12); --accent-dark: #3b82f6;
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+        body { background: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 16px; }
+        ::selection { background: var(--accent-light); color: var(--accent); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 100px 0; }
+        .section-header { margin-bottom: 56px; }
+        .section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px; }
+        .section-title { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-up.animate-in { opacity: 1; transform: translateY(0); }
+        .fade-up:nth-child(2) { transition-delay: 0.1s; }
+        .fade-up:nth-child(3) { transition-delay: 0.2s; }
+        .fade-up:nth-child(4) { transition-delay: 0.3s; }
+        .fade-up:nth-child(5) { transition-delay: 0.4s; }
+        .fade-up:nth-child(6) { transition-delay: 0.5s; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,250,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); transition: var(--transition); }
+        @media (prefers-color-scheme: dark) { nav { background: rgba(10,10,10,0.85); } }
+        .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 14px; font-weight: 500; transition: var(--transition); position: relative; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--accent); transition: width 0.3s ease; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 101; background: none; border: none; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; transform-origin: center; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .mobile-menu { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 8px 24px; box-shadow: var(--shadow-hover); }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 14px 0; color: var(--text-primary); text-decoration: none; font-size: 16px; font-weight: 500; border-bottom: 1px solid var(--border-light); transition: color 0.2s ease; }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--accent); }
+
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 140px 24px 100px; text-align: center; position: relative; background: radial-gradient(ellipse at 50% 0%, var(--accent-light) 0%, transparent 60%); }
+        .hero-inner { max-width: 760px; position: relative; z-index: 1; }
+        .availability-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--accent-light); border: 1px solid var(--accent); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 28px; }
+        .pulse { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .hero-avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #7c3aed); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; font-size: 36px; font-weight: 700; color: white; box-shadow: var(--shadow); letter-spacing: -0.02em; }
+        .hero h1 { font-size: clamp(36px, 6vw, 60px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+        .hero-roles { font-size: 18px; color: var(--text-secondary); margin-bottom: 24px; font-weight: 400; word-wrap: break-word; }
+        .hero-desc { font-size: 17px; color: var(--text-tertiary); max-width: 580px; margin: 0 auto 36px; line-height: 1.7; }
+        .hero-cta { display: inline-flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .btn { padding: 12px 28px; border-radius: var(--radius-md); font-size: 15px; font-weight: 500; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--text-primary); color: var(--bg); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border-light); border-color: var(--text-tertiary); }
+
+        .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: start; }
+        .about-text p { color: var(--text-secondary); font-size: 16px; line-height: 1.8; margin-bottom: 18px; }
+        .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .stat { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: var(--transition); }
+        .stat:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .stat-value { font-size: 32px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+        .stat-label { font-size: 13px; color: var(--text-tertiary); margin-top: 4px; font-weight: 500; }
+
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: var(--border); }
+        .timeline-item { position: relative; width: 50%; padding: 0 40px 48px; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--surface); top: 4px; box-shadow: 0 0 0 4px var(--accent-light); }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -7px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -7px; }
+        .timeline-content { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: var(--transition); }
+        .timeline-content:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+        .timeline-date { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+        .timeline-title { font-size: 17px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.01em; }
+        .timeline-company { font-size: 14px; color: var(--text-secondary); margin-bottom: 10px; font-weight: 500; }
+        .timeline-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        .timeline-desc li { margin-bottom: 6px; list-style: none; position: relative; padding-left: 16px; }
+        .timeline-desc li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+
+        .education-card { max-width: 600px; margin: 0 auto; padding: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; transition: var(--transition); }
+        .education-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+        .edu-icon { width: 56px; height: 56px; border-radius: var(--radius-lg); background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px; }
+        .edu-school { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .edu-degree { font-size: 16px; color: var(--text-secondary); margin-bottom: 8px; }
+        .edu-year { font-size: 14px; color: var(--accent); font-weight: 600; }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .skill-category { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: var(--transition); }
+        .skill-category:hover { border-color: var(--accent); }
+        .skill-category h3 { font-size: 16px; font-weight: 600; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+        .skill-category h3 .icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag { padding: 6px 14px; background: var(--border-light); border: 1px solid var(--border); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--text-secondary); transition: var(--transition); cursor: default; }
+        .skill-tag:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-1px); }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
+        .project-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .project-thumb { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 48px; position: relative; overflow: hidden; }
+        .grad-1 { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+        .grad-2 { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+        .grad-3 { background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
+        .grad-4 { background: linear-gradient(135deg, #ea580c, #fb923c); }
+        .grad-5 { background: linear-gradient(135deg, #2563eb, #818cf8); }
+        .grad-6 { background: linear-gradient(135deg, #334155, #64748b); }
+        .project-info { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+        .role-badge { display: inline-block; padding: 4px 12px; background: var(--accent-light); color: var(--accent); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 100px; margin-bottom: 12px; width: fit-content; }
+        .project-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em; }
+        .project-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+        .project-meta { margin-bottom: 14px; }
+        .project-meta p { font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.5; }
+        .project-meta strong { color: var(--text-primary); font-weight: 600; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-light); }
+        .project-tag { padding: 4px 10px; background: var(--border-light); border-radius: var(--radius-sm); font-size: 11px; font-weight: 500; color: var(--text-secondary); }
+        .project-link { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); font-size: 13px; font-weight: 500; text-decoration: none; margin-top: 12px; transition: gap 0.2s ease; }
+        .project-link:hover { gap: 8px; text-decoration: underline; }
+
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 700px; margin: 0 auto; }
+        .contact-card { padding: 28px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; text-decoration: none; color: inherit; transition: var(--transition); }
+        .contact-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
+        .contact-icon { width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 20px; }
+        .contact-label { font-size: 13px; color: var(--text-tertiary); margin-bottom: 4px; font-weight: 500; }
+        .contact-value { font-size: 15px; font-weight: 600; color: var(--text-primary); word-break: break-word; }
+
+        footer { padding: 40px 24px; text-align: center; border-top: 1px solid var(--border-light); }
+        footer p { font-size: 13px; color: var(--text-tertiary); }
+        footer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+        .scroll-top { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--text-primary); color: var(--bg); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 99; border: none; font-size: 18px; box-shadow: var(--shadow-hover); }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            section { padding: 60px 0; }
+            .hero { padding: 120px 20px 60px; min-height: auto; }
+            .hero-cta { flex-direction: column; width: 100%; }
+            .hero-cta .btn { width: 100%; justify-content: center; }
+            .about-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 56px; padding-right: 0; }
+            .timeline-dot { left: 14px !important; right: auto !important; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="logo">JSM</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="availability-badge fade-up">
+                <span class="pulse"></span>
+                Open to opportunities
+            </div>
+            <div class="hero-avatar fade-up">JSM</div>
+            <h1 class="fade-up">Joseph Sahr Morsay</h1>
+            <p class="hero-roles fade-up">Information Systems Student &bull; Graphic Designer &bull; Web Developer &bull; Tech Entrepreneur</p>
+            <p class="hero-desc fade-up">Building impactful digital solutions that solve real-world problems. From designing brand identities to developing web applications and launching startups, I combine creativity with technology to make a difference in Sierra Leone and beyond.</p>
+            <div class="hero-cta fade-up">
+                <a href="#projects" class="btn btn-primary">View my work &darr;</a>
+                <a href="mailto:Josephmorsay0@gmail.com?subject=CV%20Request%20-%20Joseph%20Sahr%20Morsay" class="btn btn-secondary">Download CV</a>
+                <a href="#contact" class="btn btn-secondary">Contact me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header fade-up">
+                <p class="section-label">About me</p>
+                <h2 class="section-title">My journey into technology & design</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <p>Growing up in Sierra Leone, I witnessed firsthand how technology could bridge gaps and solve everyday challenges. This sparked my journey into Information Systems, design, and web development — a path that led me to found <strong>ErrandBoy Express</strong> and work with brands like <strong>Salone Padi</strong> and <strong>Divine Grace Solutions</strong>.</p>
+                    <p>I believe great digital solutions don't just look good; they <strong>solve real problems</strong>. Whether I'm designing a brand identity, building a web application, or brainstorming the next startup idea, my focus is always on creating impact — for my community in Sierra Leone and beyond.</p>
+                    <p>When I'm not coding or designing, you'll find me exploring AI tools, learning about entrepreneurship, or thinking about how technology can transform lives across West Africa.</p>
+                </div>
+                <div class="stats fade-up">
+                    <div class="stat">
+                        <div class="stat-value">4+</div>
+                        <div class="stat-label">Years experience</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label">Clients served</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Projects built</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">Startup founded</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background: var(--surface);">
+        <div class="container">
+            <div class="section-header fade-up">
+                <p class="section-label">Experience</p>
+                <h2 class="section-title">Where I've worked</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-date">2023 &mdash; Present</p>
+                        <h3 class="timeline-title">Founder</h3>
+                        <p class="timeline-company">ErrandBoy Express</p>
+                        <ul class="timeline-desc">
+                            <li>Founded and operate a digital errand service platform connecting Freetown residents with reliable task runners.</li>
+                            <li>Handle product strategy, web development, branding, and day-to-day customer operations.</li>
+                            <li>Built the platform using HTML, CSS, JavaScript, and Wix to ensure accessibility across devices.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-date">2021 &mdash; Present</p>
+                        <h3 class="timeline-title">Graphic Designer</h3>
+                        <p class="timeline-company">Freelance</p>
+                        <ul class="timeline-desc">
+                            <li>Designed brand identities, logos, and marketing materials for 15+ local businesses and startups.</li>
+                            <li>Specialized in print design, social media graphics, and comprehensive brand strategy.</li>
+                            <li>Delivered projects using Adobe Photoshop and Canva with quick turnaround times.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-date">2022 &mdash; Present</p>
+                        <h3 class="timeline-title">Secretary &amp; IT Support</h3>
+                        <p class="timeline-company">Salone Padi</p>
+                        <ul class="timeline-desc">
+                            <li>Manage administrative operations and maintain the organization's digital infrastructure.</li>
+                            <li>Developed and maintain the company website, ensuring up-to-date content and smooth user experience.</li>
+                            <li>Provide technical support to staff and oversee social media content strategy.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-date">2023 &mdash; Present</p>
+                        <h3 class="timeline-title">Creative Designer</h3>
+                        <p class="timeline-company">Divine Grace Solutions</p>
+                        <ul class="timeline-desc">
+                            <li>Lead all creative design work including branding, web design, and marketing collateral.</li>
+                            <li>Collaborate with the development team to translate designs into functional web experiences.</li>
+                            <li>Created visual identities for 5+ client projects across various industries.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <div class="section-header fade-up" style="text-align: center;">
+                <p class="section-label">Education</p>
+                <h2 class="section-title">Academic background</h2>
+            </div>
+            <div class="education-card fade-up">
+                <div class="edu-icon">🎓</div>
+                <h3 class="edu-school">Institute of Public Administration and Management (IPAM)</h3>
+                <p class="edu-degree">Bachelor of Science (Hons.) in Information Systems</p>
+                <p class="edu-year">Expected Graduation: 2026 &middot; Freetown, Sierra Leone</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" style="background: var(--surface);">
+        <div class="container">
+            <div class="section-header fade-up">
+                <p class="section-label">Capabilities</p>
+                <h2 class="section-title">Tools &amp; technologies</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category fade-up">
+                    <h3><span class="icon">🎨</span> Design</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Adobe Photoshop</span>
+                        <span class="skill-tag">Canva</span>
+                        <span class="skill-tag">Branding</span>
+                        <span class="skill-tag">Logo Design</span>
+                        <span class="skill-tag">Print Design</span>
+                        <span class="skill-tag">Social Media Graphics</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-up">
+                    <h3><span class="icon">💻</span> Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Wix</span>
+                        <span class="skill-tag">Replit</span>
+                        <span class="skill-tag">GitHub</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-up">
+                    <h3><span class="icon">✏️</span> UI / UX</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Responsive Design</span>
+                        <span class="skill-tag">Wireframing</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-up">
+                    <h3><span class="icon">⚡</span> Productivity</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microsoft Office</span>
+                        <span class="skill-tag">AI Tools</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-header fade-up">
+                <p class="section-label">Featured work</p>
+                <h2 class="section-title">Projects I'm proud of</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-up">
+                    <div class="project-thumb grad-1">🚀</div>
+                    <div class="project-info">
+                        <span class="role-badge">Founder &amp; Lead Developer</span>
+                        <h3 class="project-title">ErrandBoy Express</h3>
+                        <p class="project-desc">A digital platform connecting busy professionals with reliable errand runners in Freetown. Users can book deliveries, document processing, and personal tasks on-demand.</p>
+                        <div class="project-meta">
+                            <p><strong>Problem:</strong> Finding trustworthy errand services in Sierra Leone was time-consuming and unreliable.</p>
+                            <p><strong>Solution:</strong> Built a web-based platform with verified runners and real-time task tracking.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Wix</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-up">
+                    <div class="project-thumb grad-2">💰</div>
+                    <div class="project-info">
+                        <span class="role-badge">Developer &amp; UI Designer</span>
+                        <h3 class="project-title">Pocket Ledger</h3>
+                        <p class="project-desc">A lightweight expense tracking web app designed for small business owners and students to manage finances without complex accounting software.</p>
+                        <div class="project-meta">
+                            <p><strong>Problem:</strong> Existing finance apps were too complex and data-heavy for users with limited connectivity.</p>
+                            <p><strong>Solution:</strong> Created a simple, offline-capable ledger with visual spending summaries.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Replit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-up">
+                    <div class="project-thumb grad-3">🌍</div>
+                    <div class="project-info">
+                        <span class="role-badge">Developer &amp; Designer</span>
+                        <h3 class="project-title">Environmental Alert</h3>
+                        <p class="project-desc">A community-driven platform for reporting and tracking environmental hazards like flooding, deforestation, and waste dumping across Freetown.</p>
+                        <div class="project-meta">
+                            <p><strong>Problem:</strong> Environmental issues in communities often go unreported until they become crises.</p>
+                            <p><strong>Solution:</strong> Built a reporting system with location tagging and community alert notifications.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Figma</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-up">
+                    <div class="project-thumb grad-4">🌶️</div>
+                    <div class="project-info">
+                        <span class="role-badge">Web Developer &amp; Graphic Designer</span>
+                        <h3 class="project-title">Two Brothers Spice Website</h3>
+                        <p class="project-desc">An e-commerce website showcasing and selling authentic West African spices to local and international customers.</p>
+                        <div class="project-meta">
+                            <p><strong>Problem:</strong> Two Brothers Spice had no digital presence to reach customers beyond their physical store.</p>
+                            <p><strong>Solution:</strong> Designed and developed a visually rich product catalog with ordering capabilities.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Wix</span>
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">Canva</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-up">
+                    <div class="project-thumb grad-5">🇸🇱</div>
+                    <div class="project-info">
+                        <span class="role-badge">Secretary, IT Support &amp; Web Dev</span>
+                        <h3 class="project-title">Salone Padi</h3>
+                        <p class="project-desc">A community platform celebrating Sierra Leonean culture, connecting diaspora members, and sharing local news and opportunities.</p>
+                        <div class="project-meta">
+                            <p><strong>Problem:</strong> Sierra Leoneans abroad lacked a dedicated space to stay connected with home.</p>
+                            <p><strong>Solution:</strong> Developed a content-rich website with event listings, cultural features, and community forums.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Wix</span>
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">Canva</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-up">
+                    <div class="project-thumb grad-6">🏢</div>
+                    <div class="project-info">
+                        <span class="role-badge">Creative Designer &amp; Web Developer</span>
+                        <h3 class="project-title">Divine Grace Solutions</h3>
+                        <p class="project-desc">A professional website for a business solutions company offering consulting, branding, and IT services to corporate clients.</p>
+                        <div class="project-meta">
+                            <p><strong>Problem:</strong> The company needed a credible online presence to attract corporate clients.</p>
+                            <p><strong>Solution:</strong> Created a polished, professional website with service breakdowns and contact integration.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Wix</span>
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">Adobe Photoshop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: var(--surface);">
+        <div class="container">
+            <div class="section-header fade-up" style="text-align: center;">
+                <p class="section-label">Let's talk</p>
+                <h2 class="section-title">Interested in working together?</h2>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 17px; max-width: 520px; margin: 0 auto 40px; line-height: 1.7;" class="fade-up">
+                I'm currently open to freelance projects, internships, and full-time opportunities. Whether you have a specific project in mind or just want to chat about design and tech, I'd love to hear from you.
+            </p>
+            <div class="contact-grid fade-up">
+                <a href="mailto:Josephmorsay0@gmail.com" class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <p class="contact-label">Email</p>
+                    <p class="contact-value">Josephmorsay0@gmail.com</p>
+                </a>
+                <a href="tel:+23231175746" class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <p class="contact-label">Phone</p>
+                    <p class="contact-value">+232 31 175 746</p>
+                </a>
+                <a href="https://wa.me/23231175746" target="_blank" rel="noopener" class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <p class="contact-label">WhatsApp</p>
+                    <p class="contact-value">+232 31 175 746</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Joseph Sahr Morsay. Built with passion in Sierra Leone. <a href="#">Back to top &uarr;</a></p>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">&uarr;</button>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll spy for active nav link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // IntersectionObserver for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
